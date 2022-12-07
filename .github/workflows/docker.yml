@@ -48,4 +48,4 @@ jobs:
           --platform=linux/amd64,linux/arm64 \
           --output "type=image,push=true" \
           --file ./Dockerfile ./ \
-          --tag $(echo "${DOCKERHUB_USERNAME}" | tr '[:upper:]' '[:lower:]')/${{ env.PROJECT }}:2
+          --tag $(echo "${DOCKERHUB_USERNAME}" | tr '[:upper:]' '[:lower:]')/${{ env.PROJECT }}:3
