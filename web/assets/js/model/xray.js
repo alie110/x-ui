@@ -1411,7 +1411,8 @@ Inbound.TrojanSettings.Fallback = class extends XrayCommonClass {
     constructor(name="", alpn='', path='', dest='', xver=0) {
         super();
         this.name = name;
-        this.alpn = alpn;
+        this.alpn = [];
+        this.alpn.push(alpn);
         this.path = path;
         this.dest = dest;
         this.xver = xver;
