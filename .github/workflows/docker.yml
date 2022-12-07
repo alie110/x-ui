@@ -47,5 +47,5 @@ jobs:
           docker buildx build \
           --platform=linux/amd64,linux/arm64 \
           --output "type=image,push=true" \
-          --file ${{ env.PROJECT }}/Dockerfile ./${{ env.PROJECT }} \
+          --file ./Dockerfile ./ \
           --tag $(echo "${DOCKERHUB_USERNAME}" | tr '[:upper:]' '[:lower:]')/${{ env.PROJECT }}:1
