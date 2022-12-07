@@ -1,7 +1,7 @@
 name: Docker Image CI
 
 env:
-  PROJECT: chevereto
+  PROJECT: x-ui
 on:
   push:
     branches: [ main ]
@@ -48,5 +48,5 @@ jobs:
           --platform=linux/amd64,linux/arm64 \
           --output "type=image,push=true" \
           --file ${{ env.PROJECT }}/Dockerfile ./${{ env.PROJECT }} \
-          --tag $(echo "${DOCKER_USERNAME}" | tr '[:upper:]' '[:lower:]')/${{ env.PROJECT }}:latest \
-          --tag $(echo "${DOCKER_USERNAME}" | tr '[:upper:]' '[:lower:]')/${{ env.PROJECT }}:${TAG}
+          --tag $(echo "${DOCKER_HUB_USERNAME}" | tr '[:upper:]' '[:lower:]')/${{ env.PROJECT }}:latest \
+          --tag $(echo "${DOCKER_HUB_USERNAME}" | tr '[:upper:]' '[:lower:]')/${{ env.PROJECT }}:${TAG}
