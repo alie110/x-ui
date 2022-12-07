@@ -168,6 +168,7 @@ install_x-ui() {
     echo -e "x-ui install      - Install   x-ui"
     echo -e "x-ui uninstall    - Uninstall x-ui"
     echo -e "----------------------------------------------"
+    echo -e "Hello there :D"
 }
 
 echo -e "${green}excuting...${plain}"
