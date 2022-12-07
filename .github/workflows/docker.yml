@@ -40,7 +40,6 @@ jobs:
     - name: Build Dockerfile
       env:
         DOCKERHUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
-        DOCKERHUB_REPO: ${{ secrets.DOCKER_HUB_REPOSITORY }}
       run: |
         docker buildx build \
         --platform=linux/amd64,linux/arm64 \
