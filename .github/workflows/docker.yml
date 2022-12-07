@@ -1,4 +1,7 @@
 name: Docker Image CI
+
+env:
+  PROJECT: chevereto
 on:
   push:
     branches: [ main ]
@@ -41,8 +44,9 @@ jobs:
       env:
         DOCKERHUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
       run: |
-        docker buildx build \
-        --platform=linux/amd64,linux/arm64 \
-        --output "type=image,push=true" \
-        --file ./Dockerfile ./ \
-        --tag $(echo "${DOCKERHUB_USERNAME}" | tr '[:upper:]' '[:lower:]')/${{ github.event.inputs.project }}:latest
+          docker buildx build \
+          --platform=linux/amd64,linux/arm64 \
+          --output "type=image,push=true" \
+          --file ${{ env.PROJECT }}/Dockerfile ./${{ env.PROJECT }} \
+          --tag $(echo "${DOCKER_USERNAME}" | tr '[:upper:]' '[:lower:]')/${{ env.PROJECT }}:latest \
+          --tag $(echo "${DOCKER_USERNAME}" | tr '[:upper:]' '[:lower:]')/${{ env.PROJECT }}:${TAG}
