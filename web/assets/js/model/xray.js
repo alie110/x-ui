@@ -114,7 +114,7 @@ class TcpStreamSettings extends XrayCommonClass {
                 type='none',
                 request=new TcpStreamSettings.TcpRequest(),
                 response=new TcpStreamSettings.TcpResponse(),
-                ) {
+    ) {
         super();
         this.acceptProxyProtocol = acceptProxyProtocol;
         this.type = type;
@@ -251,7 +251,7 @@ class KcpStreamSettings extends XrayCommonClass {
                 writeBufferSize=2,
                 type='none',
                 seed=RandomUtil.randomSeq(10),
-                ) {
+    ) {
         super();
         this.mtu = mtu;
         this.tti = tti;
@@ -505,7 +505,7 @@ class StreamSettings extends XrayCommonClass {
                 httpSettings=new HttpStreamSettings(),
                 quicSettings=new QuicStreamSettings(),
                 grpcSettings=new GrpcStreamSettings(),
-                ) {
+    ) {
         super();
         this.network = network;
         this.security = security;
@@ -609,7 +609,7 @@ class Inbound extends XrayCommonClass {
                 tag='',
                 sniffing=new Sniffing(),
                 clientStats='',
-                ) {
+    ) {
         super();
         this.port = port;
         this.listen = listen;
@@ -825,6 +825,10 @@ class Inbound extends XrayCommonClass {
                 if(this.settings.vlesses[index]._expiryTime != null)
                     return this.settings.vlesses[index]._expiryTime < new Date().getTime();
                 return false
+            case Protocols.SOCKS:
+                if(this.settings.accounts[index]._expiryTime != null)
+                    return this.settings.accounts[index]._expiryTime < new Date().getTime();
+                return false
             default:
                 return false;
         }
@@ -836,6 +840,7 @@ class Inbound extends XrayCommonClass {
             case Protocols.VLESS:
             case Protocols.TROJAN:
             case Protocols.SHADOWSOCKS:
+            case Protocols.SOCKS:
                 break;
             default:
                 return false;
@@ -1264,12 +1269,19 @@ Inbound.VLESSSettings = class extends Inbound.Settings {
 
 };
 Inbound.VLESSSettings.VLESS = class extends XrayCommonClass {
+    get email() {
+        return this._email;
+    }
+
+    set email(value) {
+        this._email = value;
+    }
 
     constructor(id=RandomUtil.randomUUID(), flow=FLOW_CONTROL.DIRECT, email='', limitIp=0, totalGB=0, expiryTime='') {
         super();
         this.id = id;
         this.flow = flow;
-        this.email = email;
+        this._email = email;
         this.limitIp = limitIp;
         this.totalGB = totalGB;
         this.expiryTime = expiryTime;
@@ -1280,7 +1292,7 @@ Inbound.VLESSSettings.VLESS = class extends XrayCommonClass {
         return new Inbound.VLESSSettings.VLESS(
             json.id,
             json.flow,
-            json.email,
+            json._email,
             json.limitIp,
             json.totalGB,
             json.expiryTime,
@@ -1575,14 +1587,55 @@ Inbound.SocksSettings = class extends Inbound.Settings {
     }
 };
 Inbound.SocksSettings.SocksAccount = class extends XrayCommonClass {
-    constructor(user=RandomUtil.randomSeq(10), pass=RandomUtil.randomSeq(10)) {
+    get email() {
+        return this._email;
+    }
+
+    set email(value) {
+        this._email = value;
+    }
+
+    constructor(email='', limitIp=0, totalGB=0, expiryTime='', user=RandomUtil.randomSeq(10), pass=RandomUtil.randomSeq(10)) {
         super();
         this.user = user;
         this.pass = pass;
+        this._email = email;
+        this.limitIp = limitIp;
+        this.totalGB = totalGB;
+        this.expiryTime = expiryTime;
     }
 
     static fromJson(json={}) {
-        return new Inbound.SocksSettings.SocksAccount(json.user, json.pass);
+        return new Inbound.SocksSettings.SocksAccount(
+            json.user,
+            json.pass,
+            json._email,
+            json.limitIp,
+            json.totalGB,
+            json.expiryTime,
+        );
+    }
+
+    get _expiryTime() {
+        if (this.expiryTime === 0 || this.expiryTime === "") {
+            return null;
+        }
+        return moment(this.expiryTime);
+    }
+
+    set _expiryTime(t) {
+        if (t == null || t === "") {
+            this.expiryTime = 0;
+        } else {
+            this.expiryTime = t.valueOf();
+        }
+    }
+    get _totalGB() {
+        return toFixed(this.totalGB / ONE_GB, 2);
+    }
+
+    set _totalGB(gb) {
+        this.totalGB = toFixed(gb * ONE_GB, 0);
     }
 };
 
