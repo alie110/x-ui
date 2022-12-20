@@ -4,14 +4,14 @@
 
 xray panel supporting multi-protocol, **Multi-lang (English,Chinese)**, **IP Restrication Per Inbound**
 
-| Features        | Enable?           |
-| ------------- |:-------------:|
-| Multi-lang | :heavy_check_mark: |
-| [IP Restriction](https://github.com/hossinasaadi/x-ui/#enable-ip-restrictions-per-inbound) | :heavy_check_mark: |
-| [Inbound Multi User](https://github.com/hossinasaadi/x-ui/#enable-multi-user-traffic--exprire-day) | :heavy_check_mark: |
-| [Multi User Traffic & expire day](https://github.com/hossinasaadi/x-ui/#enable-multi-user-traffic--exprire-day) | :heavy_check_mark: |
-| [REST API](https://github.com/hossinasaadi/x-ui/pull/51) | :heavy_check_mark: |
-| [Telegram BOT](https://github.com/hossinasaadi/x-ui/pull/110) | :heavy_check_mark: |
+| Features                                                                                                       | Enable?           |
+|----------------------------------------------------------------------------------------------------------------|:-------------:|
+| Multi-lang                                                                                                     | :heavy_check_mark: |
+| [IP Restriction](https://github.com/neo-rainboy/x-ui/#enable-ip-restrictions-per-inbound)                      | :heavy_check_mark: |
+| [Inbound Multi User](https://github.com/neo-rainboy/x-ui/#enable-multi-user-traffic--exprire-day)              | :heavy_check_mark: |
+| [Multi User Traffic & expire day](https://github.com/neo-rainboy/x-ui/#enable-multi-user-traffic--exprire-day) | :heavy_check_mark: |
+| [REST API](https://github.com/neo-rainboy/x-ui/pull/51)                                                        | :heavy_check_mark: |
+| [Telegram BOT](https://github.com/neo-rainboy/x-ui/pull/110)                                                   | :heavy_check_mark: |
 
 **If you think this project is helpful to you, you may wish to give a** :star2: 
 
@@ -91,12 +91,12 @@ find this in config :
 # Install & Upgrade
 
 ```
-bash <(curl -Ls https://raw.githubusercontent.com/hossinasaadi/x-ui/master/install.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/neo-rainboy/x-ui/master/install.sh)
 ```
 
 ## Manual install & upgrade
 
-1. First download the latest compressed package from https://github.com/hossinasaadi/x-ui/releases , generally choose Architecture `amd64`
+1. First download the latest compressed package from https://github.com/neo-rainboy/x-ui/releases , generally choose Architecture `amd64`
 2. Then upload the compressed package to the server's `/root/` directory and `root` rootlog in to the server with user
 
 > If your server cpu architecture is not `amd64` replace another architecture
@@ -116,7 +116,7 @@ systemctl restart x-ui
 
 ## Install using docker
 
-> This docker tutorial and docker image are provided by [hossinasaadi](https://github.com/hossinasaadi)
+> This docker tutorial and docker image are provided by [neo-rainboy](https://github.com/neo-rainboy)
 
 1. install docker
 
@@ -132,7 +132,7 @@ docker run -itd --network=host \
     -v $PWD/db/:/etc/x-ui/ \
     -v $PWD/cert/:/root/cert/ \
     --name x-ui --restart=unless-stopped \
-    hossinasaadi/x-ui:latest
+    neo-rainboy/x-ui:latest
 ```
 
 > Build your own image
@@ -213,4 +213,4 @@ x-ui v2-ui
 
 ## Stargazers over time
 
-[![Stargazers over time](https://starchart.cc/hossinasaadi/x-ui.svg)](https://starchart.cc/hossinasaadi/x-ui)
+[![Stargazers over time](https://starchart.cc/neo-rainboy/x-ui.svg)](https://starchart.cc/neo-rainboy/x-ui)
