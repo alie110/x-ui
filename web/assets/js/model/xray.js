@@ -1595,7 +1595,7 @@ Inbound.SocksSettings.SocksAccount = class extends XrayCommonClass {
         this._email = value;
     }
 
-    constructor(email='', limitIp=0, totalGB=0, expiryTime='', user=RandomUtil.randomSeq(10), pass=RandomUtil.randomSeq(10)) {
+    constructor(user=RandomUtil.randomSeq(10), pass=RandomUtil.randomSeq(10), email='', limitIp=0, totalGB=0, expiryTime='') {
         super();
         this.user = user;
         this.pass = pass;
